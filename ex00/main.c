@@ -57,11 +57,15 @@ int	main(int argc, char **argv)
 		}
 		i++;
 	}
+	print4na4(borders);
 	v1 = 0;
+	v2 = 0;
+	v3 = 0;
+	v4 = 0;
 	int checkresult = 0;
-	while (checkresult == 0 && (v1 < 24 && v2 < 24 && v3 < 24 && v4 < 24))
+	while (checkresult == 0 && (v1 < 22 && v2 < 22 && v3 < 22 && v4 < 22))
 	{
-		while (v1 < 24 && !checkresult)
+		while (v1 < 22 && !checkresult)
 		{
 			if (variants()[v1][0] == borders[2][0] && variants()[v1][1] == borders[3][0])
 			{
@@ -70,7 +74,7 @@ int	main(int argc, char **argv)
 				result[0][2] = variants()[v1][4];
 				result[0][3] = variants()[v1][5];
 				v2 = 0;
-				while (v2 < 24 && !checkresult)
+				while (v2 < 22 && !checkresult)
 				{
 					if (variants()[v2][0] == borders[2][1] && variants()[v2][1] == borders[3][1])
 					{
@@ -79,7 +83,7 @@ int	main(int argc, char **argv)
 						result[1][2] = variants()[v2][4];
 						result[1][3] = variants()[v2][5];
 						v3 = 0;
-						while (v3 < 24 && !checkresult)
+						while (v3 < 22 && !checkresult)
 						{
 							if (variants()[v3][0] == borders[2][2] && variants()[v3][1] == borders[3][2])
 							{
@@ -88,7 +92,7 @@ int	main(int argc, char **argv)
 								result[2][2] = variants()[v3][4];
 								result[2][3] = variants()[v3][5];
 								v4 = 0;
-								while (v4 < 24 && !checkresult)
+								while (v4 < 22 && !checkresult)
 								{
 									if (variants()[v4][0] == borders[2][3] && variants()[v4][1] == borders[3][3])
 									{

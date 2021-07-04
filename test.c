@@ -32,7 +32,7 @@ int	main(void)
 //	printf("%d\n", is_follow_view_rules(2, var5, 4));
 //	printf("%d\n", is_follow_view_rules(3, var5, 4));
 
-	const int VC = 12;
+	const int VC = 22;
 	//int var6[4] = {4, 2, 1, 3};
 	//int **variants = get_all_variants();
 	int current[4] = {0, 0, 0, 0};
