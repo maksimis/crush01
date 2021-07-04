@@ -29,6 +29,8 @@ void	print4na4(int result[4][4])
 		while (l < 4)
 		{
 			write_int(result[i][l]);
+			if (l < 3)
+				write(1, " ", 1);
 			l++;
 		}
 		write(1, "\n", 1);
