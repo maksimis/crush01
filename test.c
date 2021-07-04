@@ -32,19 +32,19 @@ int	main(void)
 //	printf("%d\n", is_follow_view_rules(2, var5, 4));
 //	printf("%d\n", is_follow_view_rules(3, var5, 4));
 
-
+	const int VC = 12;
 	//int var6[4] = {4, 2, 1, 3};
 	//int **variants = get_all_variants();
 	int current[4] = {0, 0, 0, 0};
 
 	int i = 0;
-	while (i < 13)
+	while (i < VC)
 	{
 		current[0] = variants()[i][2];
 		current[1] = variants()[i][3];
 		current[2] = variants()[i][4];
 		current[3] = variants()[i][5];
-		printf(%=)
+
 //		printf("%d %d\n", i, is_follow_main_rules(current));
 //		printf("%d %d\n", i, is_follow_view_rules(variants()[i][0], current, 4));
 		printf("%d %d\n", i, is_follow_all_rules(variants()[i][0], variants()[i][1], current, 4));

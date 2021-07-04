@@ -35,25 +35,36 @@ int	is_follow_view_rules(int boarder, int *v, int len)
 	return (0);
 }
 
+int	is_follow_view_rules_revers(int boarder, int *v, int len)
+{
+	int	i;
+	int	last;
+
+	i = len - 2;
+	last = v[i + 1];
+	boarder = boarder - 1;
+	while (i >= 0)
+	{
+		if (v[i] > last)
+		{
+			last = v[i];
+			boarder--;
+		}
+		i--;
+	}
+	if (boarder == 0)
+		return (1);
+	return (0);
+}
+
 int	is_follow_all_rules(int left, int right, int *v, int len)
 {
-	int	*revers;
-	int	i;
-
 	if (is_follow_main_rules(v) == 0)
 		return (0);
 	if (is_follow_view_rules(left, v, len) == 0)
 		return (0);
-	revers = malloc(sizeof(int) * len);
-	i = 0;
-	while (i < len / 2 + 1)
-	{
-		revers[i] = v[len - i];
-		i++;
-	}
-	if (is_follow_view_rules(right, revers, len) == 0)
+	if (is_follow_view_rules_revers(right, v, len) == 0)
 		return (0);
-	free(revers);
 	return (1);
 }
 
@@ -69,20 +80,52 @@ void	write_to_variant(int *var, int a, int b, int c, int d, int e, int f)
 
 int	(*variants(void))[6]
 {
-	static int all_variants[13][6] = {
+	static int all_variants[24][6] = {
 			{4, 1, 1, 2, 3, 4},
 			{1, 2, 4, 1, 2, 3},
 			{1, 2, 4, 2, 1, 3},
 			{1, 3, 4, 2, 3, 1},
-			{1, 3, 4, 2, 3, 1},
+			{1, 3, 4, 2, 3, 1}, //дубликат
 			{2, 2, 1, 4, 2, 3},
 			{2, 2, 3, 4, 1, 2},
 			{2, 2, 2, 4, 1, 3},
 			{2, 3, 1, 4, 3, 2},
 			{2, 3, 2, 4, 3, 1},
 			{2, 3, 3, 4, 2, 1},
-			{3, 2, 1, 2, 4, 1},
-			{3, 1, 2, 3, 1, 4}};
+			{3, 1, 2, 3, 1, 4},
+
+			{1, 4, 4, 3, 2, 1},
+			{2, 1, 3, 2, 1, 4},
+			{2, 1, 3, 1, 2, 4},
+			{3, 1, 1, 3, 2, 4},
+			{3, 1, 1, 3, 2, 4}, //дубликат
+			{2, 2, 3, 2, 4, 1},
+			{2, 2, 2, 1, 4, 3},
+			{2, 2, 3, 1, 4, 2},
+			{3, 2, 2, 3, 4, 1},
+			{3, 2, 1, 3, 4, 2},
+			{3, 2, 1, 2, 4, 3},
+			{1, 3, 4, 1, 3, 2},
+	};
 	return (all_variants);
+}
+
+int check_result(int result[4][4], int borders[4][4])
+{
+	int	i;
+	int buffer[4];
+
+	i = 0;
+	while (i < 4)
+	{
+		buffer[0] = result[0][i];
+		buffer[1] = result[1][i];
+		buffer[2] = result[2][i];
+		buffer[3] = result[3][i];
+		if (is_follow_all_rules(borders[0][i], borders[1][i], buffer, 4) == 0)
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
