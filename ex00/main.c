@@ -1,9 +1,36 @@
 #include <stdio.h>
 #include <unistd.h>
 
-int	(*variants(void))[6];
+static int	g_variants[24][6] = {
+		{4, 1, 1, 2, 3, 4},
+		{1, 2, 4, 1, 2, 3},
+		{1, 2, 4, 2, 1, 3},
+		{1, 3, 4, 2, 3, 1},
+		{2, 2, 1, 4, 2, 3},
+		{2, 2, 3, 4, 1, 2},
+		{2, 2, 2, 4, 1, 3},
+		{2, 3, 1, 4, 3, 2},
+		{2, 3, 2, 4, 3, 1},
+		{2, 3, 3, 4, 2, 1},
+		{3, 1, 2, 3, 1, 4},
+		{3, 1, 2, 1, 3, 4},
+		{1, 4, 4, 3, 2, 1},
+		{2, 1, 3, 2, 1, 4},
+		{2, 1, 3, 1, 2, 4},
+		{3, 1, 1, 3, 2, 4},
+		{2, 2, 3, 2, 4, 1},
+		{2, 2, 2, 1, 4, 3},
+		{2, 2, 3, 1, 4, 2},
+		{3, 2, 2, 3, 4, 1},
+		{3, 2, 1, 3, 4, 2},
+		{3, 2, 1, 2, 4, 3},
+		{1, 3, 4, 1, 3, 2},
+		{1, 3, 4, 3, 1, 2},
+};
 
-int check_result(int result[4][4], int borders[4][4]);
+int	check_result(int result[4][4], int borders[4][4]);
+
+void	write_to_4array(int *arr, int a, int b, int c, int d);
 
 void	write_int(int nb)
 {
@@ -57,7 +84,6 @@ int	main(int argc, char **argv)
 		}
 		i++;
 	}
-	print4na4(borders);
 	v1 = 0;
 	v2 = 0;
 	v3 = 0;
@@ -67,39 +93,27 @@ int	main(int argc, char **argv)
 	{
 		while (v1 < 24 && !checkresult)
 		{
-			if (variants()[v1][0] == borders[2][0] && variants()[v1][1] == borders[3][0])
+			if (g_variants[v1][0] == borders[2][0] && g_variants[v1][1] == borders[3][0])
 			{
-				result[0][0] = variants()[v1][2];
-				result[0][1] = variants()[v1][3];
-				result[0][2] = variants()[v1][4];
-				result[0][3] = variants()[v1][5];
+				write_to_4array(result[0], g_variants[v1][2], g_variants[v1][3], g_variants[v1][4], g_variants[v1][5]);
 				v2 = 0;
 				while (v2 < 24 && !checkresult)
 				{
-					if (variants()[v2][0] == borders[2][1] && variants()[v2][1] == borders[3][1])
+					if (g_variants[v2][0] == borders[2][1] && g_variants[v2][1] == borders[3][1])
 					{
-						result[1][0] = variants()[v2][2];
-						result[1][1] = variants()[v2][3];
-						result[1][2] = variants()[v2][4];
-						result[1][3] = variants()[v2][5];
+						write_to_4array(result[1], g_variants[v2][2], g_variants[v2][3], g_variants[v2][4], g_variants[v2][5]);
 						v3 = 0;
 						while (v3 < 24 && !checkresult)
 						{
-							if (variants()[v3][0] == borders[2][2] && variants()[v3][1] == borders[3][2])
+							if (g_variants[v3][0] == borders[2][2] && g_variants[v3][1] == borders[3][2])
 							{
-								result[2][0] = variants()[v3][2];
-								result[2][1] = variants()[v3][3];
-								result[2][2] = variants()[v3][4];
-								result[2][3] = variants()[v3][5];
+								write_to_4array(result[2], g_variants[v3][2], g_variants[v3][3], g_variants[v3][4], g_variants[v3][5]);
 								v4 = 0;
 								while (v4 < 24 && !checkresult)
 								{
-									if (variants()[v4][0] == borders[2][3] && variants()[v4][1] == borders[3][3])
+									if (g_variants[v4][0] == borders[2][3] && g_variants[v4][1] == borders[3][3])
 									{
-										result[3][0] = variants()[v4][2];
-										result[3][1] = variants()[v4][3];
-										result[3][2] = variants()[v4][4];
-										result[3][3] = variants()[v4][5];
+										write_to_4array(result[3], g_variants[v4][2], g_variants[v4][3], g_variants[v4][4], g_variants[v4][5]);
 										checkresult = check_result(result, borders);
 									}
 									v4++;

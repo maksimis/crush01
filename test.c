@@ -34,20 +34,20 @@ int	main(void)
 
 	const int VC = 22;
 	//int var6[4] = {4, 2, 1, 3};
-	//int **variants = get_all_variants();
+	//int **variants = get_all_g_variants;
 	int current[4] = {0, 0, 0, 0};
 
 	int i = 0;
 	while (i < VC)
 	{
-		current[0] = variants()[i][2];
-		current[1] = variants()[i][3];
-		current[2] = variants()[i][4];
-		current[3] = variants()[i][5];
+		current[0] = g_variants[i][2];
+		current[1] = g_variants[i][3];
+		current[2] = g_variants[i][4];
+		current[3] = g_variants[i][5];
 
 //		printf("%d %d\n", i, is_follow_main_rules(current));
-//		printf("%d %d\n", i, is_follow_view_rules(variants()[i][0], current, 4));
-		printf("%d %d\n", i, is_follow_all_rules(variants()[i][0], variants()[i][1], current, 4));
+//		printf("%d %d\n", i, is_follow_view_rules(g_variants[i][0], current, 4));
+		printf("%d %d\n", i, is_follow_all_rules(g_variants[i][0], g_variants[i][1], current, 4));
 		i++;
 	}
 
