@@ -59,7 +59,7 @@ int	main(int argc, char **argv)
 	}
 	v1 = 0;
 	int checkresult = 0;
-	while (checkresult == 0)
+	while (checkresult == 0 && (v1 < 24 && v2 < 24 && v3 < 24 && v4 < 24))
 	{
 		while (v1 < 24 && !checkresult)
 		{
@@ -110,5 +110,8 @@ int	main(int argc, char **argv)
 			v1++;
 		}
 	}
-	print4na4(result);
+	if (checkresult == 1)
+		print4na4(result);
+	else
+		write(1, "Error\n", 6);
 }
