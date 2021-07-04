@@ -1,107 +1,65 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+#include "var.h"
 
-int	is_follow_main_rules(int *v)
+void	write_to_4array(int *arr, int a[6])
 {
-	if (v[0] == v[1] || v[0] == v[2] || v[0] == v[3]
-		|| v[1] == v[2] || v[1] == v[3]
-		|| v[2] == v[3])
-	{
-		return (0);
-	}
-	return (1);
+	arr[0] = a[2];
+	arr[1] = a[3];
+	arr[2] = a[4];
+	arr[3] = a[5];
 }
 
-int	is_follow_view_rules(int boarder, int *v, int len)
+void	write_int(int nb)
+{
+	nb = nb + 48;
+	write(1, &nb, 1);
+}
+
+void	print4na4(int result[4][4])
 {
 	int	i;
-	int	last;
-
-	i = 1;
-	last = v[0];
-	boarder = boarder - 1;
-	while (i < len)
-	{
-		if (v[i] > last)
-		{
-			last = v[i];
-			boarder--;
-		}
-		i++;
-	}
-	if (boarder == 0)
-		return (1);
-	return (0);
-}
-
-int	is_follow_view_rules_revers(int boarder, int *v, int len)
-{
-	int	i;
-	int	last;
-
-	i = len - 2;
-	last = v[i + 1];
-	boarder = boarder - 1;
-	while (i >= 0)
-	{
-		if (v[i] > last)
-		{
-			last = v[i];
-			boarder--;
-		}
-		i--;
-	}
-	if (boarder == 0)
-		return (1);
-	return (0);
-}
-
-int	is_follow_all_rules(int left, int right, int *v, int len)
-{
-	if (is_follow_main_rules(v) == 0)
-		return (0);
-	if (is_follow_view_rules(left, v, len) == 0)
-		return (0);
-	if (is_follow_view_rules_revers(right, v, len) == 0)
-		return (0);
-	return (1);
-}
-
-void	write_to_variant(int *var, int a, int b, int c, int d, int e, int f)
-{
-	var[0] = a;
-	var[1] = b;
-	var[2] = c;
-	var[3] = d;
-	var[4] = e;
-	var[5] = f;
-}
-
-void	write_to_4array(int *arr, int a, int b, int c, int d)
-{
-	arr[0] = a;
-	arr[1] = b;
-	arr[2] = c;
-	arr[3] = d;
-}
-
-int check_result(int result[4][4], int borders[4][4])
-{
-	int	i;
-	int buffer[4];
+	int	l;
 
 	i = 0;
 	while (i < 4)
 	{
-		buffer[0] = result[0][i];
-		buffer[1] = result[1][i];
-		buffer[2] = result[2][i];
-		buffer[3] = result[3][i];
-		if (is_follow_all_rules(borders[0][i], borders[1][i], buffer, 4) == 0)
+		l = 0;
+		while (l < 4)
+		{
+			write_int(result[i][l]);
+			l++;
+		}
+		write(1, "\n", 1);
+		i++;
+	}
+}
+
+int	check_result(int result[4][4], int borders[4][4])
+{
+	int	i;
+	int	l;
+	int	check;
+
+	i = 0;
+	while (i < 4)
+	{
+		check = 0;
+		l = 0;
+		while (l < g_count && check == 0)
+		{
+			if (g_vs[l][0] == borders[0][i] && g_vs[l][1] == borders[1][i]
+			&& g_vs[l][2] == result[0][i] && g_vs[l][3] == result[1][i]
+			&& g_vs[l][4] == result[2][i] && g_vs[l][5] == result[3][i])
+			{
+				check = 1;
+			}
+			l++;
+		}
+		if (check == 0)
 			return (0);
 		i++;
 	}
 	return (1);
 }
-

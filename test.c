@@ -4,6 +4,82 @@
 #include <stdio.h>
 #include "ex00/ft.c"
 
+int	is_follow_main_rules(int *v)
+{
+	if (v[0] == v[1] || v[0] == v[2] || v[0] == v[3]
+		|| v[1] == v[2] || v[1] == v[3]
+		|| v[2] == v[3])
+	{
+		return (0);
+	}
+	return (1);
+}
+
+int	is_follow_view_rules(int boarder, int *v, int len)
+{
+	int	i;
+	int	last;
+
+	i = 1;
+	last = v[0];
+	boarder = boarder - 1;
+	while (i < len)
+	{
+		if (v[i] > last)
+		{
+			last = v[i];
+			boarder--;
+		}
+		i++;
+	}
+	if (boarder == 0)
+		return (1);
+	return (0);
+}
+
+int	is_follow_view_rules_revers(int boarder, int *v, int len)
+{
+	int	i;
+	int	last;
+
+	i = len - 2;
+	last = v[i + 1];
+	boarder = boarder - 1;
+	while (i >= 0)
+	{
+		if (v[i] > last)
+		{
+			last = v[i];
+			boarder--;
+		}
+		i--;
+	}
+	if (boarder == 0)
+		return (1);
+	return (0);
+}
+
+int	is_follow_all_rules(int left, int right, int *v, int len)
+{
+	if (is_follow_main_rules(v) == 0)
+		return (0);
+	if (is_follow_view_rules(left, v, len) == 0)
+		return (0);
+	if (is_follow_view_rules_revers(right, v, len) == 0)
+		return (0);
+	return (1);
+}
+
+void	write_to_variant(int *var, int a, int b, int c, int d, int e, int f)
+{
+	var[0] = a;
+	var[1] = b;
+	var[2] = c;
+	var[3] = d;
+	var[4] = e;
+	var[5] = f;
+}
+
 int	main(void)
 {
 //	int var1[4] = {1, 2, 3, 4};
@@ -34,20 +110,20 @@ int	main(void)
 
 	const int VC = 22;
 	//int var6[4] = {4, 2, 1, 3};
-	//int **variants = get_all_g_variants;
+	//int **variants = get_all_g_vs;
 	int current[4] = {0, 0, 0, 0};
 
 	int i = 0;
 	while (i < VC)
 	{
-		current[0] = g_variants[i][2];
-		current[1] = g_variants[i][3];
-		current[2] = g_variants[i][4];
-		current[3] = g_variants[i][5];
+		current[0] = g_vs[i][2];
+		current[1] = g_vs[i][3];
+		current[2] = g_vs[i][4];
+		current[3] = g_vs[i][5];
 
 //		printf("%d %d\n", i, is_follow_main_rules(current));
-//		printf("%d %d\n", i, is_follow_view_rules(g_variants[i][0], current, 4));
-		printf("%d %d\n", i, is_follow_all_rules(g_variants[i][0], g_variants[i][1], current, 4));
+//		printf("%d %d\n", i, is_follow_view_rules(g_vs[i][0], current, 4));
+		printf("%d %d\n", i, is_follow_all_rules(g_vs[i][0], g_vs[i][1], current, 4));
 		i++;
 	}
 
