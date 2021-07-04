@@ -37,7 +37,7 @@ void	write_to_4array(int *arr, int a[4]);
 
 void	print4na4(int result[4][4]);
 
-void	find_borders(int borders[4][4], char *str);
+int		find_borders(int borders[4][4], char *str);
 
 int	find_sub_sub_result(int v[4], int result[4][4], int bs[4][4])
 {
@@ -115,13 +115,20 @@ int	main(int argc, char **argv)
 	int	result[4][4];
 	int	borders[4][4];
 	int	checkresult;
+	int	error;
 
+	error = 0;
 	if (argc != 2)
 	{
 		write(1, "Error\n", 6);
 		return (0);
 	}
-	find_borders(borders, argv[1]);
+	error = find_borders(borders, argv[1]);
+	if (error == 1)
+	{
+		write(1, "Error\n", 6);
+		return (0);
+	}
 	checkresult = find_result(result, borders);
 	if (checkresult == 1)
 		print4na4(result);
