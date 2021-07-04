@@ -37,6 +37,8 @@ void	write_to_4array(int *arr, int a[4]);
 
 void	print4na4(int result[4][4]);
 
+void	find_borders(int borders[4][4], char *str);
+
 int	find_sub_sub_result(int v[4], int result[4][4], int bs[4][4])
 {
 	int	checkresult;
@@ -106,24 +108,6 @@ int	find_result(int result[4][4], int bs[4][4])
 		}
 	}
 	return (checkresult);
-}
-
-void	find_borders(int borders[4][4], char *str)
-{
-	int	i;
-	int	l;
-
-	i = 0;
-	l = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] != ' ')
-		{
-			borders[l / 4][l % 4] = str[i] - 48;
-			l++;
-		}
-		i++;
-	}
 }
 
 int	main(int argc, char **argv)

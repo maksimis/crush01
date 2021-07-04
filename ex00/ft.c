@@ -63,3 +63,21 @@ int	check_result(int result[4][4], int borders[4][4])
 	}
 	return (1);
 }
+
+void	find_borders(int borders[4][4], char *str)
+{
+	int	i;
+	int	l;
+
+	i = 0;
+	l = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] != ' ')
+		{
+			borders[l / 4][l % 4] = str[i] - 48;
+			l++;
+		}
+		i++;
+	}
+}
