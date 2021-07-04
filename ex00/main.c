@@ -34,6 +34,10 @@ int	main(int argc, char **argv)
 {
 	int i;
 	int l;
+	int v1;
+	int v2;
+	int v3;
+	int v4;
 	int result[4][4];
 	int borders[4][4];
 
@@ -53,21 +57,7 @@ int	main(int argc, char **argv)
 		}
 		i++;
 	}
-	i = 0;
-	while (i < 4)
-	{
-		l = 0;
-		while (l < 4)
-		{
-			result[i][l] = 0;
-			l++;
-		}
-		i++;
-	}
-	int v1 = 0;
-	int v2 = 0;
-	int v3 = 0;
-	int v4 = 0;
+	v1 = 0;
 	int checkresult = 0;
 	while (checkresult == 0)
 	{
